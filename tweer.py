@@ -29,19 +29,20 @@ def lasttweet () :
         for tweet in public_tweets:
                 tweet_tnk_date = []
                 dt_obj  = ""
-                # analysis = tb(tweet.text)
-                
-                # print("tran:"+translator.translate(tweet.text))
-                # print(analysis.detect_language())
-                # polarity = analysis.sentiment.polarity
-                # tweets.append(polarity)
                 without_url = re.sub(r'http\S+', "", tweet.text)
                 without_url =re.sub(u'[^a-zA-Z0-9áéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕçÇ: ]', '', without_url).lower()
                 tokens = word_tokenize(without_url)
                 filtered_sentence = [w for w in tokens if not w in stopwords]  
                 if(datetime.now() - tweet.created_at ).days <3:
-                        tweets_text.append(filtered_sentence)
-        
+                        tweet_token = []
+                        tweet_token.append(without_url)
+                        tweet_token.append(tweet.created_at)
+                        tweets_text.append(tweet_token)
+
+        panda_tweet = pd.DataFrame(tweets_text)
+        panda_tweet.rename(columns = {0: "conteudo"},inplace=True)
+        panda_tweet.rename(columns = {1: "date"},inplace=True)
+        panda_tweet['date'] = panda_tweet['date'].dt.normalize()
         return tweets_text
              
 
