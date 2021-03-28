@@ -16,6 +16,7 @@ import nltk
 from flask import Flask
 import tweer
 import tweepy
+import json
 
 app = Flask(__name__)
 @app.route("/")
@@ -130,11 +131,15 @@ val_pred = multinomial_clf.predict(df['conteudo'])
 print(df)
 print(val_pred)
 type(val_pred)
+
+list_predict = np.array(val_pred).tolist()
+json_predict = json.dumps({"prediction": list_predicta})
+json_predict
 # print(tweer.lasttweet())
 
 @app.route("/dolar")
 def get_stock():
-    res = make_response(str(val_pred), 200)
+    res = make_response(str(json_predict), 200)
     return res
 
 if __name__ == "__main__":
