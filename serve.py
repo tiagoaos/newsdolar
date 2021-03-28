@@ -42,7 +42,9 @@ pd_text.rename(columns = {"published_at": "date"},inplace=True)
 pd_text['date'] = pd.to_datetime(pd_text['date'], format='%Y-%m-%d')
 pd_text['date2'] = pd_text['date'].dt.normalize()
 print(pd_text.head(5))
-print("foi")
+
+
+
 
 
 # @app.route("/stock")
@@ -50,6 +52,63 @@ print("foi")
 #     res = make_response(jsonify(stock), 200)
 #     return res
 
+# pd_text['pca'] = (
+#    pd_text["title"]
+#    .pipe(hero.clean)
+#    .pipe(hero.tfidf)
+#    .pipe(hero.pca)
+# )
+
+
+df_dolar_real = pd.read_csv('/content/drive/MyDrive/ai/USD_BRL.csv')
+
+df_dolar_real.rename(columns = {"Último": "Ultimo"},inplace=True)
+df_dolar_real.rename(columns = {"Var%": "Var"},inplace=True)
+df_dolar_real.rename(columns = {"Data": "date"},inplace=True)
+
+df_dolar_real['date'] = pd.to_datetime(df_dolar_real['date'], format='%d.%m.%Y')
+df_dolar_real['date'] = df_dolar_real['date'].dt.normalize()
+
+# df_dolar_real['Ultimo'] = df_dolar_real['Ultimo'].astype(int)
+df_dolar_real = df_dolar_real.replace(',','.', regex=True)
+df_dolar_real = df_dolar_real.replace('%','', regex=True)
+df_dolar_real['Ultimo'] = pd.to_numeric(df_dolar_real['Ultimo'])
+df_dolar_real['Máxima'] = pd.to_numeric(df_dolar_real['Máxima'])
+df_dolar_real['Mínima'] = pd.to_numeric(df_dolar_real['Mínima'])
+
+
+pd_text['date'] = pd.to_datetime(pd_text.date).dt.tz_localize(None)
+pd_text['date'] = pd_text['date'].dt.normalize()
+df_dolar_real.drop_duplicates()
+pd_merge_media = pd.merge(pd_text[["title","date"]],df_dolar_real[['date','Var']])
+pd_merge_media.head(10)
+#define o var dolar
+def var_dolar(fvar):
+  ivar = 0
+  ivar = float(fvar['Var'])
+  if ivar>0:
+    return 0
+  else:
+    return 1
+pd_merge_media['var-dolar'] = pd_merge_media.apply(var_dolar, axis=1)
+nltk.download('stopwords')
+stopwords = nltk.corpus.stopwords.words('portuguese')
+pd_merge_media['title'] = hero.remove_stopwords(pd_merge_media['title'], stopwords)
+X = pd_merge_media['title']
+y = pd_merge_media['var-dolar']
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state = 42)
+print('tamanho do X_train: ', X_train.shape, '\t', 'tamanho do y_train: ', y_train.shape)
+print('---------------------------------------------------------------------------')
+print('tamanho do X_test: ', X_test.shape, '\t', 'tamanho do y_test: ', y_test.shape)
+
+multinomial_clf = Pipeline([('cv', CountVectorizer(ngram_range=(1, 2))),                            
+                     ('clf', MultinomialNB())])
+
+complement_clf = Pipeline([('cv', CountVectorizer(ngram_range=(1, 2))),
+                     ('clf', ComplementNB())])
+
+svm_clf = Pipeline([('cv', CountVectorizer(ngram_range=(1, 2))),
+                     ('clf', svm.SVC(kernel = 'linear'))])
 
 
 
