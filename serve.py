@@ -47,17 +47,6 @@ print(pd_text.head(5))
 
 
 
-# @app.route("/stock")
-# def get_stock():
-#     res = make_response(jsonify(stock), 200)
-#     return res
-
-# pd_text['pca'] = (
-#    pd_text["title"]
-#    .pipe(hero.clean)
-#    .pipe(hero.tfidf)
-#    .pipe(hero.pca)
-# )
 
 
 df_dolar_real = pd.read_csv('USD_BRL.csv')
@@ -120,6 +109,24 @@ pred_svm = svm_clf.predict(X_test)
 print(classification_report(y_test, pred_complement, digits = 3))
 
 
+
+
+# pd_text['pca'] = (
+#    pd_text["title"]
+#    .pipe(hero.clean)
+#    .pipe(hero.tfidf)
+#    .pipe(hero.pca)
+# )
+
+teste = ["dólar tem maior baixa semanal em 9 meses "]
+
+val_pred = multinomial_clf.predict(teste)
+print(val_pred)
+
+@app.route("/stock")
+def get_stock():
+    res = make_response(val_pred, 200)
+    return res
 
 # if __name__ == "__main__":
 #     app.run(port=80,host='0.0.0.0')
