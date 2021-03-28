@@ -14,6 +14,9 @@ from datetime import datetime
 from nltk.corpus import stopwords
 import nltk
 from flask import Flask
+import tweer
+import tweepy
+
 app = Flask(__name__)
 @app.route("/")
 
@@ -123,6 +126,9 @@ teste = ["dólar tem maior baixa semanal em 9 meses "]
 val_pred = multinomial_clf.predict(teste)
 print(val_pred)
 
+
+tweer.lasttweet()
+
 @app.route("/stock")
 def get_stock():
     res = make_response(val_pred, 200)
@@ -130,3 +136,4 @@ def get_stock():
 
 # if __name__ == "__main__":
 #     app.run(port=80,host='0.0.0.0')
+
