@@ -43,7 +43,7 @@ def lasttweet () :
         panda_tweet.rename(columns = {0: "conteudo"},inplace=True)
         panda_tweet.rename(columns = {1: "date"},inplace=True)
         panda_tweet['date'] = panda_tweet['date'].dt.normalize()
-        return tweets_text
+        return panda_tweet
              
 
 
