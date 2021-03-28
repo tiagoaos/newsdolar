@@ -123,11 +123,16 @@ print(classification_report(y_test, pred_complement, digits = 3))
 
 teste = ["dólar tem maior baixa semanal em 9 meses "]
 
-val_pred = multinomial_clf.predict(teste)
+# val_pred = multinomial_clf.predict(teste)
+# print(val_pred)
+
+
+df = tweer.lasttweet()
+val_pred = multinomial_clf.predict(df)
+print(df)
 print(val_pred)
 
-
-print(tweer.lasttweet())
+# print(tweer.lasttweet())
 
 @app.route("/stock")
 def get_stock():
