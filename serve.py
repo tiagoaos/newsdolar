@@ -60,7 +60,7 @@ print(pd_text.head(5))
 # )
 
 
-df_dolar_real = pd.read_csv('/content/drive/MyDrive/ai/USD_BRL.csv')
+df_dolar_real = pd.read_csv('USD_BRL.csv')
 
 df_dolar_real.rename(columns = {"Último": "Ultimo"},inplace=True)
 df_dolar_real.rename(columns = {"Var%": "Var"},inplace=True)
