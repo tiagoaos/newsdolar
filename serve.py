@@ -134,7 +134,7 @@ print(val_pred)
 
 @app.route("/dolar")
 def get_stock():
-    res = make_response(val_pred, 200)
+    res = make_response(jsonify(val_pred), 200)
     return res
 
 if __name__ == "__main__":
