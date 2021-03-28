@@ -25,7 +25,6 @@ def lasttweet () :
         nltk.download('stopwords')
 
         stopwords = nltk.corpus.stopwords.words('portuguese')
-        print(stopwords)
         public_tweets = api.search('dolar lang:pt (from:InvestingBrasil OR from:valoreconomico OR from:UOLEconomia)',count =30)
         for tweet in public_tweets:
                 tweet_tnk_date = []

@@ -125,7 +125,7 @@ teste = ["dólar tem maior baixa semanal em 9 meses "]
 
 
 df = tweer.lasttweet()
-print(df)
+print(df.head(4))
 val_pred = multinomial_clf.predict(df['conteudo'])
 print(df)
 print(val_pred)
