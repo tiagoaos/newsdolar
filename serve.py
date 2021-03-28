@@ -129,12 +129,12 @@ print(df.head(4))
 val_pred = multinomial_clf.predict(df['conteudo'])
 print(df)
 print(val_pred)
-
+type(val_pred)
 # print(tweer.lasttweet())
 
 @app.route("/dolar")
 def get_stock():
-    res = make_response(jsonify(val_pred), 200)
+    res = make_response(str(val_pred), 200)
     return res
 
 if __name__ == "__main__":
