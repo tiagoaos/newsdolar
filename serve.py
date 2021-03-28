@@ -44,7 +44,6 @@ pd_text.rename(columns = {"published_at": "date"},inplace=True)
 # Transforma a string em data mantendo somente a data
 pd_text['date'] = pd.to_datetime(pd_text['date'], format='%Y-%m-%d')
 pd_text['date2'] = pd_text['date'].dt.normalize()
-print(pd_text.head(5))
 
 
 
@@ -89,9 +88,7 @@ stopwords = nltk.corpus.stopwords.words('portuguese')
 X = pd_merge_media['title']
 y = pd_merge_media['var-dolar']
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state = 42)
-print('tamanho do X_train: ', X_train.shape, '\t', 'tamanho do y_train: ', y_train.shape)
-print('---------------------------------------------------------------------------')
-print('tamanho do X_test: ', X_test.shape, '\t', 'tamanho do y_test: ', y_test.shape)
+
 
 multinomial_clf = Pipeline([('cv', CountVectorizer(ngram_range=(1, 2))),                            
                      ('clf', MultinomialNB())])
@@ -109,7 +106,7 @@ pred_mult = multinomial_clf.predict(X_test)
 pred_complement = complement_clf.predict(X_test)
 pred_svm = svm_clf.predict(X_test)
 
-print(classification_report(y_test, pred_complement, digits = 3))
+
 
 
 
@@ -128,6 +125,7 @@ teste = ["dólar tem maior baixa semanal em 9 meses "]
 
 
 df = tweer.lasttweet()
+print(df)
 val_pred = multinomial_clf.predict(df['conteudo'])
 print(df)
 print(val_pred)
