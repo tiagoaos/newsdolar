@@ -27,7 +27,7 @@ def lasttweet () :
                 # print("tran:"+translator.translate(tweet.text))
                 # print(analysis.detect_language())
                 # polarity = analysis.sentiment.polarity
-                tweets.append(polarity)
+                # tweets.append(polarity)
                 without_url = re.sub(r'http\S+', "", tweet.text)
                 without_url =re.sub(u'[^a-zA-Z0-9áéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕçÇ: ]', '', without_url).lower()
                 print(without_url)
