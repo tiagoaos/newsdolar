@@ -42,7 +42,8 @@ pd_text.rename(columns = {"published_at": "date"},inplace=True)
 # Transforma a string em data mantendo somente a data
 # pd_text['date'] = pd.to_datetime(pd_text['date'], format='%Y-%m-%d')
 # pd_text['date2'] = pd_text['date'].dt.normalize()
-pd_text.head(5)
+print(pd_text.head(5))
+print("foi")
 
 
 # @app.route("/stock")
