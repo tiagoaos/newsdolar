@@ -132,11 +132,11 @@ print(val_pred)
 
 # print(tweer.lasttweet())
 
-@app.route("/stock")
+@app.route("/dolar")
 def get_stock():
     res = make_response(val_pred, 200)
     return res
 
-# if __name__ == "__main__":
-#     app.run(port=80,host='0.0.0.0')
+if __name__ == "__main__":
+    app.run(port=80,host='0.0.0.0')
 
