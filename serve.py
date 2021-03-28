@@ -133,7 +133,7 @@ print(val_pred)
 type(val_pred)
 
 list_predict = np.array(val_pred).tolist()
-json_predict = json.dumps({"prediction": list_predicta})
+json_predict = json.dumps({"prediction": list_predict})
 json_predict
 # print(tweer.lasttweet())
 
