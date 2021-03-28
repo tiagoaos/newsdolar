@@ -1,19 +1,21 @@
 
-tweets = [] # Lista vazia para armazenar scores
-tweets_text = []
-twets_date = []
-tweets_witout_url = []
 
 
 import nltk
 import tweepy
 from nltk.corpus import stopwords
 from nltk.tokenize import sent_tokenize, word_tokenize
+import tokens_tt
+import re
 
+tweets = [] # Lista vazia para armazenar scores
+tweets_text = []
+twets_date = []
+tweets_witout_url = []
 
 def lasttweet () :
-        auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-        auth.set_access_token(access_token, access_token_secret)
+        auth = tweepy.OAuthHandler(tokens_tt.consumer_key, tokens_tt.consumer_secret)
+        auth.set_access_token(tokens_tt.access_token, tokens_tt.access_token_secret)
         api = tweepy.API(auth)  
         nltk.download('stopwords')
         stopwords = nltk.corpus.stopwords.words('portuguese')
