@@ -8,6 +8,7 @@ from nltk.tokenize import sent_tokenize, word_tokenize
 import tokens_tt
 import re
 from datetime import datetime
+import pandas as pd
 
 tweets = [] # Lista vazia para armazenar scores
 tweets_text = []
