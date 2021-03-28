@@ -17,7 +17,9 @@ def lasttweet () :
         auth = tweepy.OAuthHandler(tokens_tt.consumer_key, tokens_tt.consumer_secret)
         auth.set_access_token(tokens_tt.access_token, tokens_tt.access_token_secret)
         api = tweepy.API(auth)  
+        nltk.download('punkt')
         nltk.download('stopwords')
+
         stopwords = nltk.corpus.stopwords.words('portuguese')
         print(stopwords)
         public_tweets = api.search('dolar lang:pt (from:InvestingBrasil OR from:valoreconomico OR from:UOLEconomia)',count =30)
