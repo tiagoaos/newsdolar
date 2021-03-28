@@ -33,7 +33,7 @@ stock = {
 
 df = pd.read_csv('0dolar2020-11-01,2021-03-242.csv',header=None, sep='\n')
 df2 = pd.read_csv('100dolar2020-11-01,2021-03-242.csv',header=None, sep='\n')
-df4 = pd.read_csv('200dolar2020-11-01,2021-03-242.csv',header=None, sep='\n')
+df3 = pd.read_csv('200dolar2020-11-01,2021-03-242.csv',header=None, sep='\n')
 
 
 frames = [df, df2, df3]
