@@ -127,7 +127,7 @@ val_pred = multinomial_clf.predict(teste)
 print(val_pred)
 
 
-tweer.lasttweet()
+print(tweer.lasttweet())
 
 @app.route("/stock")
 def get_stock():
