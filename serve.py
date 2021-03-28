@@ -93,7 +93,7 @@ def var_dolar(fvar):
 pd_merge_media['var-dolar'] = pd_merge_media.apply(var_dolar, axis=1)
 nltk.download('stopwords')
 stopwords = nltk.corpus.stopwords.words('portuguese')
-pd_merge_media['title'] = hero.remove_stopwords(pd_merge_media['title'], stopwords)
+# pd_merge_media['title'] = hero.remove_stopwords(pd_merge_media['title'], stopwords)
 X = pd_merge_media['title']
 y = pd_merge_media['var-dolar']
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state = 42)
@@ -109,6 +109,15 @@ complement_clf = Pipeline([('cv', CountVectorizer(ngram_range=(1, 2))),
 
 svm_clf = Pipeline([('cv', CountVectorizer(ngram_range=(1, 2))),
                      ('clf', svm.SVC(kernel = 'linear'))])
+multinomial_clf.fit(X_train, y_train)
+complement_clf.fit(X_train, y_train)
+svm_clf.fit(X_train, y_train)
+
+pred_mult = multinomial_clf.predict(X_test)
+pred_complement = complement_clf.predict(X_test)
+pred_svm = svm_clf.predict(X_test)
+
+print(classification_report(y_test, pred_complement, digits = 3))
 
 
 
