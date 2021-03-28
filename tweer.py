@@ -5,6 +5,11 @@ twets_date = []
 tweets_witout_url = []
 
 
+import nltk
+import tweepy
+from nltk.corpus import stopwords
+from nltk.tokenize import sent_tokenize, word_tokenize
+
 
 def lasttweet () :
         auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
@@ -17,11 +22,11 @@ def lasttweet () :
         for tweet in public_tweets:
                 tweet_tnk_date = []
                 dt_obj  = ""
-                analysis = tb(tweet.text)
+                # analysis = tb(tweet.text)
                 
                 # print("tran:"+translator.translate(tweet.text))
                 # print(analysis.detect_language())
-                polarity = analysis.sentiment.polarity
+                # polarity = analysis.sentiment.polarity
                 tweets.append(polarity)
                 without_url = re.sub(r'http\S+', "", tweet.text)
                 without_url =re.sub(u'[^a-zA-Z0-9áéíóúÁÉÍÓÚâêîôÂÊÎÔãõÃÕçÇ: ]', '', without_url).lower()
