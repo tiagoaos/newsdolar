@@ -30,18 +30,17 @@ stock = {
     }
 }
 
-
-df = pd.read_csv('0dolar2020-11-01,2021-03-242.csv',header=None, sep='\n')
-df2 = pd.read_csv('100dolar2020-11-01,2021-03-242.csv',header=None, sep='\n')
-df3 = pd.read_csv('200dolar2020-11-01,2021-03-242.csv',header=None, sep='\n')
+df = pd.read_csv('0dolar2020-11-01,2021-03-242.csv',header=None)
+df2 = pd.read_csv('100dolar2020-11-01,2021-03-242.csv',header=None)
+df3 = pd.read_csv('200dolar2020-11-01,2021-03-242.csv',header=None)
 
 
 frames = [df, df2, df3]
 pd_text = pd.concat(frames)
 pd_text.rename(columns = {"published_at": "date"},inplace=True)
 # Transforma a string em data mantendo somente a data
-# pd_text['date'] = pd.to_datetime(pd_text['date'], format='%Y-%m-%d')
-# pd_text['date2'] = pd_text['date'].dt.normalize()
+pd_text['date'] = pd.to_datetime(pd_text['date'], format='%Y-%m-%d')
+pd_text['date2'] = pd_text['date'].dt.normalize()
 print(pd_text.head(5))
 print("foi")
 
