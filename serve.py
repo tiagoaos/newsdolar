@@ -125,20 +125,20 @@ teste = ["dólar tem maior baixa semanal em 9 meses "]
 # print(val_pred)
 
 
-df = tweer.lasttweet()
-print(df.head(4))
-val_pred = multinomial_clf.predict(df['conteudo'])
-print(df)
-print(val_pred)
-type(val_pred)
 
-list_predict = np.array(val_pred).tolist()
-json_predict = json.dumps({"prediction": list_predict})
-json_predict
 # print(tweer.lasttweet())
 
 @app.route("/dolar")
 def get_stock():
+    df = tweer.lasttweet()
+    print(df.head(4))
+    val_pred = multinomial_clf.predict(df['conteudo'])
+    print(df)
+    print(val_pred)
+    type(val_pred)
+    list_predict = np.array(val_pred).tolist()
+    json_predict = json.dumps({"prediction": list_predict})
+    json_predict
     res = make_response(str(json_predict), 200)
     return res
 
